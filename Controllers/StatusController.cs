@@ -1,16 +1,27 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SubscriptionManager.Models;
 
 namespace SubscriptionManager.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class StatusController : ControllerBase
+    public class SubscriptionController : ControllerBase
     {
+        public static List<Subscription> list = new List<Subscription>();
+
         [HttpGet]
-        public string GetEstado()
+        public List<Subscription> GetSubscription()
         {
-            return "Estado Retornado";
+            return list;
         }
+
+        [HttpPost]
+        public string PostSubscription(Subscription subscription)
+        {
+            list.Add(subscription);
+            return "Added Subscription Information";
+        }
+
     }
 }
