@@ -23,5 +23,18 @@ namespace SubscriptionManager.Controllers
             return "Added Subscription Information";
         }
 
+        [HttpDelete]
+        public IActionResult DeleteSubscription(Subscription subscription)
+        {
+            Subscription subscriptionAux = list.FirstOrDefault(x => x.Status == subscription.Status);
+
+            if (subscriptionAux != null)
+            {
+                list.Remove(subscriptionAux);
+                return Ok("Removed Subscription Information");
+            }
+
+            return BadRequest("Invalid Subscription");
+        }
     }
 }
